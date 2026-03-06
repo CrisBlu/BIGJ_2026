@@ -9,25 +9,38 @@ public class SimpleControllerCameraBased : MonoBehaviour
     private Vector3 playerVelocity;
     public Camera playerCamera;
 
-    [Header("Input Actions")]
-    public InputActionReference moveAction;
+    private InputAction moveAction;
+    private InputAction pickUpAction;
+    private InputAction putDownAction;
+    private GameObject itemHeld;
 
     private void OnEnable()
     {
-        moveAction.action.Enable();
+        moveAction = InputSystem.actions.FindAction("Move");
+        pickUpAction = InputSystem.actions.FindAction("Attack");
+        putDownAction = InputSystem.actions.FindAction("Drop");
+        
+
+        pickUpAction.performed += PickUp;
+        putDownAction.performed += PutDown;
+
+        itemHeld = null;
+
     }
 
     private void OnDisable()
     {
-        moveAction.action.Disable();
+        pickUpAction.performed -= PickUp;
+        putDownAction.performed -= PutDown;
     }
+
 
     void Update()
     {
         if (controller.isGrounded && playerVelocity.y < -2f)
             playerVelocity.y = -2f;
 
-        Vector2 input = moveAction.action.ReadValue<Vector2>();
+        Vector2 input = moveAction.ReadValue<Vector2>();
         Vector3 move = new Vector3(input.x, 0, input.y);
         move = Vector3.ClampMagnitude(move, 1f);
 
@@ -41,5 +54,41 @@ public class SimpleControllerCameraBased : MonoBehaviour
         playerVelocity.y += gravityValue * Time.deltaTime;
 
         controller.Move((move * playerSpeed + Vector3.up * playerVelocity.y) * Time.deltaTime);
+
     }
+
+    void PickUp(InputAction.CallbackContext context)
+    {
+        if(itemHeld)
+            return;
+
+        Collider[] items = Physics.OverlapSphere(transform.position + transform.forward, 1f);
+
+        foreach (Collider item in items)
+        {
+            //Won't hold up if we need to make guards pick up able; make an interface instead, the only reason I'm not is because this because test pick up object has no functionality besides this
+            if (item.CompareTag("PickUp"))
+            {
+                item.transform.SetParent(transform, true);
+                item.gameObject.SetActive(false);
+                itemHeld = item.gameObject;
+
+                break;
+            }
+        }
+    }
+
+    void PutDown(InputAction.CallbackContext context)
+    {
+        if (!itemHeld)
+            return;
+
+        itemHeld.transform.SetParent(null, true);
+        itemHeld.SetActive(true);
+        itemHeld = null;
+
+    }
+
+    
 }
+
