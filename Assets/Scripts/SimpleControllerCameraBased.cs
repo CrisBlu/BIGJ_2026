@@ -12,17 +12,23 @@ public class SimpleControllerCameraBased : MonoBehaviour
     private InputAction moveAction;
     private InputAction pickUpAction;
     private InputAction putDownAction;
+    private InputAction sprintAction;
     private GameObject itemHeld;
+
 
     private void OnEnable()
     {
         moveAction = InputSystem.actions.FindAction("Move");
         pickUpAction = InputSystem.actions.FindAction("Attack");
         putDownAction = InputSystem.actions.FindAction("Drop");
+        sprintAction = InputSystem.actions.FindAction("Sprint");
         
 
         pickUpAction.performed += PickUp;
         putDownAction.performed += PutDown;
+        sprintAction.started += ToggleSprint;
+        sprintAction.canceled += ToggleSprint;
+
 
         itemHeld = null;
 
@@ -32,6 +38,8 @@ public class SimpleControllerCameraBased : MonoBehaviour
     {
         pickUpAction.performed -= PickUp;
         putDownAction.performed -= PutDown;
+        sprintAction.started -= ToggleSprint;
+        sprintAction.canceled -= ToggleSprint;
     }
 
 
@@ -55,7 +63,13 @@ public class SimpleControllerCameraBased : MonoBehaviour
 
         controller.Move((move * playerSpeed + Vector3.up * playerVelocity.y) * Time.deltaTime);
 
+
+
+
+
     }
+
+
 
     void PickUp(InputAction.CallbackContext context)
     {
@@ -87,6 +101,35 @@ public class SimpleControllerCameraBased : MonoBehaviour
         itemHeld.SetActive(true);
         itemHeld = null;
 
+    }
+
+
+    void ToggleSprint(InputAction.CallbackContext context)
+    {
+        if(context.started )
+        {
+            //sprinting = true;
+        }
+        else if(context.canceled)
+        {
+            //sprinting = false;
+        }
+    }
+
+    void Sprint()
+    {
+        PlayerStats stats = PlayerStats.Stats;
+        if(stats.adrenaline > 0)
+        {
+            stats.ShiftAdrenaline(-3);
+        }
+
+        //Stop running and such
+        //Dunno that I like this
+        if(stats.adrenaline <= 0)
+        {
+            //sprinting = false;
+        }
     }
 
     

@@ -6,6 +6,7 @@ namespace Test_Scripts
     public class SimpleControllerTest : MonoBehaviour
     {
         public float playerSpeed = 5.0f;
+        private float defaultPlayerSpeed;
         private float gravityValue = -9.81f;
 
         [Range(0f, 20f)] public float minGrindSpeed = 2f;
@@ -27,6 +28,7 @@ namespace Test_Scripts
         private InputAction twirlAction;
         private InputAction pickUpAction;
         private InputAction putDownAction;
+        private InputAction sprintAction;
 
         private GameObject itemHeld;
 
@@ -46,12 +48,15 @@ namespace Test_Scripts
             twirlAction = InputSystem.actions.FindAction("Jump");
             pickUpAction = InputSystem.actions.FindAction("Attack");
             putDownAction = InputSystem.actions.FindAction("Drop");
+            sprintAction = InputSystem.actions.FindAction("Sprint");
 
             twirlAction.performed += OnTwirl;
             pickUpAction.performed += PickUp;
             putDownAction.performed += PutDown;
 
             itemHeld = null;
+
+            defaultPlayerSpeed = playerSpeed;
         }
 
         private void OnDisable()
@@ -63,12 +68,25 @@ namespace Test_Scripts
 
         void Update()
         {
+            //Temporary measure, taunting should have a cool down
+            if (PlayerStats.Stats.taunting)
+                PlayerStats.Stats.taunting = false;
+
             if (isGrinding)
                 UpdateGrinding();
             else
                 UpdateNormal();
 
             HandleTwirl();
+
+            if(sprintAction.ReadValue<float>() == 1)
+            {
+                Sprint();
+            }
+            else
+            {
+                playerSpeed = defaultPlayerSpeed;
+            }
         }
 
         // ── normal movement ────────────────────────────────────────────
@@ -177,6 +195,8 @@ namespace Test_Scripts
 
         void OnTwirl(InputAction.CallbackContext context)
         {
+            PlayerStats.Stats.Event_Taunted.Invoke();
+
             if (isGrinding && !isTwirling)
             {
                 isTwirling = true;
@@ -213,6 +233,20 @@ namespace Test_Scripts
             itemHeld.transform.SetParent(null, true);
             itemHeld.SetActive(true);
             itemHeld = null;
+        }
+
+        void Sprint()
+        {
+            PlayerStats stats = PlayerStats.Stats;
+            if (stats.ShiftAdrenaline(-1.5f))
+            {
+                playerSpeed = 2 * defaultPlayerSpeed;
+            }
+            else
+            {
+                playerSpeed = defaultPlayerSpeed;
+            }
+
         }
     }
 }

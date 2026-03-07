@@ -1,3 +1,4 @@
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public interface IObserver
@@ -11,6 +12,12 @@ public class Guard : MonoBehaviour, IObserver
     float timeTillAlert;
     bool isSeeingPlayer;
     Vector3 lastSeenPlayerPos;
+
+    void Awake()
+    {
+        PlayerStats.Stats.Event_Taunted.AddListener(Taunted);
+    }
+
 
     void Start()
     {
@@ -27,7 +34,16 @@ public class Guard : MonoBehaviour, IObserver
     {
         if(isSeeingPlayer)
         {
+            //If time to alert is not 0 deduct time
             timeTillAlert = timeTillAlert > 0f ? timeTillAlert - Time.deltaTime : 0;
+
+
+
+            //Increase Player Adrenaline
+            if (PlayerStats.Stats)
+                PlayerStats.Stats.ShiftAdrenaline();
+                
+                
         }
         else
         {
@@ -36,7 +52,7 @@ public class Guard : MonoBehaviour, IObserver
 
         if(timeTillAlert == 0f)
         {
-            Debug.Log("Wait a minute, at " + lastSeenPlayerPos);
+            //Debug.Log("Wait a minute, at " + lastSeenPlayerPos);
         }
        
     }
@@ -49,6 +65,13 @@ public class Guard : MonoBehaviour, IObserver
         {
             lastSeenPlayerPos = position;
         }
+    }
+
+    public void Taunted()
+    {
+        if(isSeeingPlayer)
+            PlayerStats.Stats.AddAdrenaline(20f);
+
     }
 
 }
