@@ -852,11 +852,15 @@ PrefabInstance:
     - target: {fileID: 2213238694574509706, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 17738466}
+      objectReference: {fileID: 1562243717}
     - target: {fileID: 2352116278346964583, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1562243717}
+    - target: {fileID: 2352116278346964583, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
+      propertyPath: m_VersionIndex
+      value: 127
+      objectReference: {fileID: 0}
     - target: {fileID: 5276221307631611932, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -905,6 +909,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6283961634023268721, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6447503378640591490, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -913,6 +921,14 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2081547065}
+    - target: {fileID: 8650644838780301050, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
+      propertyPath: m_VersionIndex
+      value: 127
+      objectReference: {fileID: 0}
+    - target: {fileID: 9191186978981708481, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6128,6 +6144,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 893471620}
+    - target: {fileID: 2352116278346964583, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
+      propertyPath: m_VersionIndex
+      value: 127
+      objectReference: {fileID: 0}
     - target: {fileID: 5276221307631611932, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -6176,6 +6196,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6283961634023268721, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6447503378640591490, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -6184,6 +6208,14 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 128752601}
+    - target: {fileID: 8650644838780301050, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
+      propertyPath: m_VersionIndex
+      value: 127
+      objectReference: {fileID: 0}
+    - target: {fileID: 9191186978981708481, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6522,6 +6554,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 17738466}
+    - target: {fileID: 2352116278346964583, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
+      propertyPath: m_VersionIndex
+      value: 127
+      objectReference: {fileID: 0}
     - target: {fileID: 5276221307631611932, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -6570,6 +6606,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard
       objectReference: {fileID: 0}
+    - target: {fileID: 6283961634023268721, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6447503378640591490, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -6578,6 +6618,14 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1345913573}
+    - target: {fileID: 8650644838780301050, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
+      propertyPath: m_VersionIndex
+      value: 127
+      objectReference: {fileID: 0}
+    - target: {fileID: 9191186978981708481, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7214,11 +7262,15 @@ PrefabInstance:
     - target: {fileID: 2213238694574509706, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 17738466}
+      objectReference: {fileID: 434539012}
     - target: {fileID: 2352116278346964583, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 434539012}
+    - target: {fileID: 2352116278346964583, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
+      propertyPath: m_VersionIndex
+      value: 127
+      objectReference: {fileID: 0}
     - target: {fileID: 5276221307631611932, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -7267,6 +7319,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6283961634023268721, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6447503378640591490, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -7275,6 +7331,14 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 112463428}
+    - target: {fileID: 8650644838780301050, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
+      propertyPath: m_VersionIndex
+      value: 127
+      objectReference: {fileID: 0}
+    - target: {fileID: 9191186978981708481, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31373,6 +31437,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 551402849}
+    - target: {fileID: 2352116278346964583, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
+      propertyPath: m_VersionIndex
+      value: 127
+      objectReference: {fileID: 0}
     - target: {fileID: 5276221307631611932, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -31421,6 +31489,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6283961634023268721, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6447503378640591490, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -31429,6 +31501,14 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1901758730}
+    - target: {fileID: 8650644838780301050, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
+      propertyPath: m_VersionIndex
+      value: 127
+      objectReference: {fileID: 0}
+    - target: {fileID: 9191186978981708481, guid: 248f7e8f21c396b4d9656c376eb3dcfb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31483,7 +31563,7 @@ MonoBehaviour:
   m_TargetMesh: {fileID: 4300000, guid: 2a1140b6d93c50e42953134f913c0cfb, type: 2}
   m_RebuildOnSplineChange: 1
   m_RebuildFrequency: 30
-  m_UpdateColliders: 1
+  m_UpdateColliders: 0
   m_Sides: 8
   m_SegmentsPerUnit: 4
   m_Capped: 1
