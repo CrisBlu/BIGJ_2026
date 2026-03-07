@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Splines;
 
+// This Script collects the data for Unity Splines to map out the rail grind path
 public class RailSegment : MonoBehaviour
 {
     public static readonly List<RailSegment> All = new();

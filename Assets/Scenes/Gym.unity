@@ -37377,61 +37377,61 @@ MonoBehaviour:
   - m_EditModeType: 1
     m_Knots:
     - Position:
-        x: 0
-        y: 0
-        z: 0
+        x: 0.46509266
+        y: 0.228953
+        z: -1.1851006
       TangentIn:
-        x: -0
-        y: -0
-        z: -1.0927697
+        x: 0.5500021
+        y: 0.00000049569974
+        z: 0.009583788
       TangentOut:
-        x: 0
-        y: 0
-        z: 1.0927697
+        x: -1.7666265
+        y: -0.0013344288
+        z: 1.0709009
       Rotation:
         value:
-          x: -0.026725942
-          y: 0.8502822
-          z: -0.04337953
-          w: -0.52385503
+          x: 0.009213005
+          y: 0.8185623
+          z: -0.068299815
+          w: -0.5702683
     - Position:
-        x: -9.709593
-        y: -1.1121197
-        z: -4.8889236
+        x: -9.744531
+        y: -0.030754685
+        z: -4.8849216
       TangentIn:
         x: 0
         y: 0
-        z: -7.575519
+        z: -7.6558704
       TangentOut:
         x: 0
         y: 0
-        z: 7.575519
+        z: 7.6558704
       Rotation:
         value:
-          x: 0
-          y: -0.46315506
-          z: -0
-          w: 0.8862773
+          x: -0.00029682287
+          y: -0.62579477
+          z: -0.00024849182
+          w: 0.77998763
     - Position:
-        x: -22.442352
-        y: -0.15766335
-        z: -8.254024
+        x: -22.446308
+        y: 0.054923296
+        z: -8.254791
       TangentIn:
         x: 0
         y: 0
-        z: -5.7212396
+        z: -12.288474
       TangentOut:
         x: 0
         y: 0
-        z: 5.7212396
+        z: 12.288474
       Rotation:
         value:
-          x: 0
-          y: 0.9973773
-          z: 0
-          w: 0.07237766
+          x: -0.00009527517
+          y: -0.43524006
+          z: -0.00001669117
+          w: 0.9003144
     m_MetaData:
-    - Mode: 0
+    - Mode: 4
       Tension: 0.5
     - Mode: 2
       Tension: 0.5
@@ -38622,8 +38622,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 8
-  minGrindSpeed: 2
-  maxGrindSpeed: 20
+  minGrindSpeed: 3
+  maxGrindSpeed: 10
+  fixedGrindSpeed: 12
   snapDistance: 1.2
   railHeightOffset: 0.5
   grindRotationSpeed: 15

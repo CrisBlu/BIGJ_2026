@@ -10,6 +10,7 @@ namespace Test_Scripts
 
         [Range(0f, 20f)] public float minGrindSpeed = 2f;
         [Range(0f, 20f)] public float maxGrindSpeed = 6f;
+        public float fixedGrindSpeed = 12f;
         public float snapDistance = 1.2f;
         public float railHeightOffset = 0.5f;
         public float grindRotationSpeed = 10f;
@@ -23,7 +24,7 @@ namespace Test_Scripts
         private Vector3 playerVelocity;
 
         private InputAction moveAction;
-        private InputAction jumpAction;
+        private InputAction twirlAction;
         private InputAction pickUpAction;
         private InputAction putDownAction;
 
@@ -34,6 +35,7 @@ namespace Test_Scripts
         private float grindT;
         private float grindSpeed;
         private float grindCooldown;
+        private float grindDirection;
 
         private bool isTwirling;
         private float twirlTimer;
@@ -41,11 +43,11 @@ namespace Test_Scripts
         private void OnEnable()
         {
             moveAction = InputSystem.actions.FindAction("Move");
-            jumpAction = InputSystem.actions.FindAction("Jump");
+            twirlAction = InputSystem.actions.FindAction("Jump");
             pickUpAction = InputSystem.actions.FindAction("Attack");
             putDownAction = InputSystem.actions.FindAction("Drop");
 
-            jumpAction.performed += OnJump;
+            twirlAction.performed += OnTwirl;
             pickUpAction.performed += PickUp;
             putDownAction.performed += PutDown;
 
@@ -54,7 +56,7 @@ namespace Test_Scripts
 
         private void OnDisable()
         {
-            jumpAction.performed -= OnJump;
+            twirlAction.performed -= OnTwirl;
             pickUpAction.performed -= PickUp;
             putDownAction.performed -= PutDown;
         }
@@ -122,19 +124,22 @@ namespace Test_Scripts
         void EnterGrind(RailSegment rail, float startT, float speed)
         {
             activeRail = rail;
-            grindT = startT;
-            grindSpeed = Mathf.Min(speed, maxGrindSpeed);
+            grindT = Mathf.Clamp(startT, 0.01f, 0.99f);
+            grindSpeed = fixedGrindSpeed;
             isGrinding = true;
             playerVelocity.y = 0f;
+
+            Vector3 railDir = rail.GetDirection(grindT);
+            grindDirection = Vector3.Dot(transform.forward, railDir) >= 0f ? 1f : -1f;
         }
 
         void UpdateGrinding()
         {
-            grindT += (grindSpeed / activeRail.Length) * Time.deltaTime;
+            grindT += grindDirection * (grindSpeed / activeRail.Length) * Time.deltaTime;
             grindT = Mathf.Clamp01(grindT);
 
             Vector3 pos = activeRail.GetPosition(grindT) + Vector3.up * railHeightOffset;
-            Vector3 dir = activeRail.GetDirection(grindT);
+            Vector3 dir = activeRail.GetDirection(grindT) * grindDirection;
 
             controller.enabled = false;
             transform.position = pos;
@@ -144,13 +149,13 @@ namespace Test_Scripts
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir, Vector3.up),
                     Time.deltaTime * grindRotationSpeed);
 
-            if (grindT >= 1f)
+            if (grindT >= 1f || grindT <= 0f)
                 ExitGrind();
         }
 
         void ExitGrind()
         {
-            Vector3 exitDirection = activeRail.GetDirection(1f);
+            Vector3 exitDirection = activeRail.GetDirection(grindT) * grindDirection;
             playerVelocity = exitDirection * grindSpeed;
             isGrinding = false;
             activeRail = null;
@@ -170,9 +175,8 @@ namespace Test_Scripts
             }
         }
 
-        void OnJump(InputAction.CallbackContext context)
+        void OnTwirl(InputAction.CallbackContext context)
         {
-            // twirl while grinding, nothing otherwise
             if (isGrinding && !isTwirling)
             {
                 isTwirling = true;
