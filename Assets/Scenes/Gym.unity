@@ -5226,6 +5226,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30225a8afa99d7c4481d7783df72bacb, type: 3}
+--- !u!4 &1124196183 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1664898801964278715, guid: 30225a8afa99d7c4481d7783df72bacb, type: 3}
+  m_PrefabInstance: {fileID: 1124196182}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1703727766
 GameObject:
   m_ObjectHideFlags: 0
@@ -28951,7 +28956,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1787440288}
   - component: {fileID: 1787440290}
-  - component: {fileID: 1787440289}
   m_Layer: 0
   m_Name: Camera Pivot
   m_TagString: Untagged
@@ -28975,20 +28979,6 @@ Transform:
   - {fileID: 251569306}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 30, y: 45, z: 0}
---- !u!114 &1787440289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1787440287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73418b20b0984d546bc08c9cf76790d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  smoothTime: 0
 --- !u!114 &1787440290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29001,8 +28991,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73418b20b0984d546bc08c9cf76790d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  smoothTime: 0
+  target: {fileID: 1124196183}
+  smoothTime: 0.25
 --- !u!43 &1828755103
 Mesh:
   m_ObjectHideFlags: 0
