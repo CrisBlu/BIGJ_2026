@@ -10,6 +10,7 @@ public class AISensor : MonoBehaviour
     public Color meshColor = Color.red;
     public int scanFrequency = 30;
     public LayerMask layers;
+    public LayerMask occulusionLayers;
     public List<GameObject> Objects = new List<GameObject>();
 
     Collider[] colliders = new Collider[50];
@@ -62,10 +63,17 @@ public class AISensor : MonoBehaviour
         {
             return false;
         }
-
+        
         dir.y = 0;
         float deltaAngle = Vector3.Angle(dir, transform.forward);
         if (deltaAngle > angle)
+        {
+            return false;
+        }
+        
+        origin.y += height / 2;
+        dest.y = origin.y;
+        if (Physics.Linecast(origin, dest, occulusionLayers))
         {
             return false;
         }
