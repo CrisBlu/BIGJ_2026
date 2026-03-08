@@ -23,6 +23,8 @@ public class AISensor : MonoBehaviour
     [Header("Mesh In Game")] public bool showInGame = true;
     [Range(0f, 5f)] public float gameHeight = 0.05f;
 
+    [HideInInspector] public IObserver observer;
+
     void Start()
     {
         scanInterval = 1.0f / scanFrequency;
@@ -50,8 +52,11 @@ public class AISensor : MonoBehaviour
             if (IsInSight(obj))
             {
                 Objects.Add(obj);
+                
             }
         }
+
+
     }
 
     public bool IsInSight(GameObject obj)
@@ -61,6 +66,10 @@ public class AISensor : MonoBehaviour
         Vector3 dir = dest - origin;
         if (dir.y < 0 || dir.y > height)
         {
+
+            if (obj.CompareTag("Player"))
+                observer.Seeing(false, Vector3.negativeInfinity);
+
             return false;
         }
         
@@ -68,6 +77,10 @@ public class AISensor : MonoBehaviour
         float deltaAngle = Vector3.Angle(dir, transform.forward);
         if (deltaAngle > angle)
         {
+
+            if (obj.CompareTag("Player"))
+                observer.Seeing(false, Vector3.negativeInfinity);
+
             return false;
         }
         
@@ -75,8 +88,18 @@ public class AISensor : MonoBehaviour
         dest.y = origin.y;
         if (Physics.Linecast(origin, dest, occulusionLayers))
         {
+
+            if (obj.CompareTag("Player"))
+                observer.Seeing(false, Vector3.negativeInfinity);
+
             return false;
         }
+
+
+        if (obj.CompareTag("Player"))
+            observer.Seeing(true, obj.transform.position);
+
+
         return true;
     }
 

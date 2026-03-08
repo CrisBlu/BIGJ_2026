@@ -68,9 +68,6 @@ namespace Test_Scripts
 
         void Update()
         {
-            //Temporary measure, taunting should have a cool down
-            if (PlayerStats.Stats.taunting)
-                PlayerStats.Stats.taunting = false;
 
             if (isGrinding)
                 UpdateGrinding();

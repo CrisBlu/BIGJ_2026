@@ -7,7 +7,7 @@ public interface IObserver
 }
 public class Guard : MonoBehaviour, IObserver
 {
-    [SerializeField] Viewer Viewer;
+    [SerializeField] AISensor Viewer;
 
     float timeTillAlert;
     bool isSeeingPlayer;
@@ -52,7 +52,7 @@ public class Guard : MonoBehaviour, IObserver
 
         if(timeTillAlert == 0f)
         {
-            //Debug.Log("Wait a minute, at " + lastSeenPlayerPos);
+            Debug.Log("Wait a minute, at " + lastSeenPlayerPos);
         }
        
     }
