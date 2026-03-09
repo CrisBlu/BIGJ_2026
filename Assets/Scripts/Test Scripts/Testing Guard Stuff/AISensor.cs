@@ -67,7 +67,7 @@ public class AISensor : MonoBehaviour
         if (dir.y < 0 || dir.y > height)
         {
 
-            if (obj.CompareTag("Player"))
+            if (obj.CompareTag("Player")) 
                 observer.Seeing(false, Vector3.negativeInfinity);
 
             return false;
