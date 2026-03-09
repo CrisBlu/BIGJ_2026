@@ -8,6 +8,8 @@ public interface IObserver
 public class Guard : MonoBehaviour, IObserver
 {
     [SerializeField] AISensor Viewer;
+    public bool IsAlerted   => timeTillAlert == 0f;
+    public Vector3 LastSeenPlayerPos => lastSeenPlayerPos;
 
     float timeTillAlert;
     bool isSeeingPlayer;
