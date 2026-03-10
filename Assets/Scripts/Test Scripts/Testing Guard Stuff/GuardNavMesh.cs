@@ -85,6 +85,8 @@ public class GuardNavMesh : MonoBehaviour
     }
     void AdvanceWaypoint()
     {
+        if(waypoints.Length == 0)
+             return; 
         currentWaypoint = (currentWaypoint + 1) % waypoints.Length;
         GoToWaypoint(currentWaypoint);
     }

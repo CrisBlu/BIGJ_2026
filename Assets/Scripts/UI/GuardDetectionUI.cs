@@ -5,12 +5,14 @@ public class GuardDetectionUI : MonoBehaviour
     public Slider timeSlider;
     public float increaseRate = 0.25f;
     public GameObject MainCharacter;
-    public AISensor guardScript;
+    public AISensor aiSensor;
+    [HideInInspector] public Guard attachedGuard;
 
     public Image flashImage;
     public float flashSpeed = 3f;
 
     private bool isFlashing = false;
+
 
     void Start()
     {
@@ -26,14 +28,16 @@ public class GuardDetectionUI : MonoBehaviour
 
     void Update()
     {
-        if (timeSlider == null || guardScript == null) return;
+        if (timeSlider == null || aiSensor == null) return;
 
-        bool inSight = guardScript.Objects.Contains(MainCharacter);
+        bool inSight = aiSensor.Objects.Contains(MainCharacter);
+
+        timeSlider.value = (attachedGuard.TIME_TILL_ALERT - attachedGuard.timeTillAlert) / attachedGuard.TIME_TILL_ALERT;
 
         if (inSight)
         {
             timeSlider.gameObject.SetActive(true);
-            timeSlider.value += increaseRate * Time.deltaTime;
+            
 
             if (timeSlider.value >= timeSlider.maxValue)
             {
@@ -51,7 +55,7 @@ public class GuardDetectionUI : MonoBehaviour
                 flashImage.gameObject.SetActive(false);
             }
 
-            timeSlider.value -= increaseRate * Time.deltaTime;
+            //timeSlider.value -= increaseRate * Time.deltaTime;
 
             if (timeSlider.value <= timeSlider.minValue)
             {

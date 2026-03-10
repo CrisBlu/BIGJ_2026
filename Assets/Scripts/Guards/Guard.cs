@@ -8,23 +8,27 @@ public interface IObserver
 public class Guard : MonoBehaviour, IObserver
 {
     [SerializeField] AISensor Viewer;
+    [SerializeField] GuardDetectionUI UI;
     public bool IsAlerted   => timeTillAlert == 0f;
     public Vector3 LastSeenPlayerPos => lastSeenPlayerPos;
 
-    float timeTillAlert;
+    public float TIME_TILL_ALERT = 2;
+    public float timeTillAlert;
     bool isSeeingPlayer;
     Vector3 lastSeenPlayerPos;
 
     void Awake()
     {
         PlayerStats.Stats.Event_Taunted.AddListener(Taunted);
+        UI.attachedGuard = this;
     }
 
 
     void Start()
     {
+
         //Should equal a max
-        timeTillAlert = 2f;
+        timeTillAlert = TIME_TILL_ALERT;
 
         isSeeingPlayer = false;
 
@@ -49,12 +53,16 @@ public class Guard : MonoBehaviour, IObserver
         }
         else
         {
-            timeTillAlert = timeTillAlert < 2f ? timeTillAlert + Time.deltaTime : 2f;
+            timeTillAlert = timeTillAlert < TIME_TILL_ALERT ? timeTillAlert + Time.deltaTime : TIME_TILL_ALERT;
         }
 
         if(timeTillAlert == 0f)
         {
-            Debug.Log("Wait a minute, at " + lastSeenPlayerPos);
+            //Make less segmeneted and fucky
+            Vector3 LookHereDumbass = lastSeenPlayerPos;
+
+            LookHereDumbass.y = transform.position.y;
+            transform.LookAt(LookHereDumbass);
         }
        
     }
