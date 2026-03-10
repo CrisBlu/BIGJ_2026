@@ -40,7 +40,6 @@ public class GuardNavMesh : MonoBehaviour
     {
         if (guard.IsAlerted)
         {
-            hasBeenAlerted = true;
             state = GuardState.Chasing;
             return;
         }
@@ -51,25 +50,24 @@ public class GuardNavMesh : MonoBehaviour
 
     void Chase()
     {
-        if (!guard.IsAlerted && !hasBeenAlerted)
-        {
-            StartCoroutine(PauseAndResume());
-            return;
-        }
 
         if (guard.LastSeenPlayerPos == Vector3.negativeInfinity) return;
 
         float dist = Vector3.Distance(transform.position, guard.LastSeenPlayerPos);
+
+        
+
+        
+        
         if (dist > chaseStopDistance)
             guardAgent.SetDestination(guard.LastSeenPlayerPos);
         else
-            guardAgent.ResetPath();
+            StartCoroutine(PauseAndResume());
     }
     
     IEnumerator PauseAndResume()
     {
         state = GuardState.Pausing;
-        hasBeenAlerted = false;
         guardAgent.ResetPath();
 
         yield return new WaitForSeconds(pauseDuration);
