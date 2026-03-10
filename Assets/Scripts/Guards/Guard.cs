@@ -45,9 +45,7 @@ public class Guard : MonoBehaviour, IObserver
 
 
 
-            //Increase Player Adrenaline
-            if (PlayerStats.Stats)
-                PlayerStats.Stats.ShiftAdrenaline();
+
                 
                 
         }
@@ -58,7 +56,7 @@ public class Guard : MonoBehaviour, IObserver
 
         if(timeTillAlert == 0f)
         {
-            //Make less segmeneted and fucky
+            //Make less segmeneted
             Vector3 LookHereDumbass = lastSeenPlayerPos;
 
             LookHereDumbass.y = transform.position.y;

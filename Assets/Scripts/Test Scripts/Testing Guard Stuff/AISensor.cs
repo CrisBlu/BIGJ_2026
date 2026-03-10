@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AISensor : MonoBehaviour
 {
-    public float distance = 10;
+    [System.NonSerialized] public float distance;
     public float angle = 30;
     public float height = 1.0f;
     public Color meshColor = Color.red;
@@ -27,6 +27,9 @@ public class AISensor : MonoBehaviour
 
     void Start()
     {
+ 
+        
+
         scanInterval = 1.0f / scanFrequency;
     }
 
@@ -46,14 +49,40 @@ public class AISensor : MonoBehaviour
             QueryTriggerInteraction.Collide);
 
         Objects.Clear();
+
+        //Create a list of objects within your field of vision
         for (int i = 0; i < count; i++)
         {
             GameObject obj = colliders[i].gameObject;
             if (IsInSight(obj))
             {
                 Objects.Add(obj);
-                
+
+
             }
+
+           
+        }
+
+
+        foreach (GameObject obj in Objects)
+        {
+            //If one of the objects in sight is the player, run seeing behavior in observer and increase Adrenaline
+            if(obj.CompareTag("Player"))
+            {
+                PlayerStats.Stats.ShiftAdrenaline();
+                observer.Seeing(true, obj.transform.position);
+
+                break;
+            }
+
+            observer.Seeing(false, Vector3.negativeInfinity);
+
+        }
+
+        if(Objects.Count == 0)
+        {
+            observer.Seeing(false, Vector3.negativeInfinity);
         }
 
 
@@ -67,37 +96,31 @@ public class AISensor : MonoBehaviour
         if (dir.y < 0 || dir.y > height)
         {
 
-            if (obj.CompareTag("Player")) 
-                observer.Seeing(false, Vector3.negativeInfinity);
 
             return false;
         }
         
         dir.y = 0;
+        //If the object is not within this angle and in the guards "Sphere" return false
         float deltaAngle = Vector3.Angle(dir, transform.forward);
         if (deltaAngle > angle)
         {
 
-            if (obj.CompareTag("Player"))
-                observer.Seeing(false, Vector3.negativeInfinity);
 
             return false;
         }
         
         origin.y += height / 2;
         dest.y = origin.y;
+        //If there is a wall between the object and the viewer, return Do Not See
         if (Physics.Linecast(origin, dest, occulusionLayers))
         {
 
-            if (obj.CompareTag("Player"))
-                observer.Seeing(false, Vector3.negativeInfinity);
+   
 
             return false;
         }
 
-
-        if (obj.CompareTag("Player"))
-            observer.Seeing(true, obj.transform.position);
 
 
         return true;
@@ -180,6 +203,9 @@ Mesh CreateWedgeMesh(float h)
 
     private void OnValidate()
     {
+        //Temporary, just I don't have to deal with individually serlialized variables
+        distance = 7f;
+
         scanInterval = 1.0f/scanFrequency;
         mesh = CreateWedgeMesh(height);
         gameMesh = CreateWedgeMesh(gameHeight);
