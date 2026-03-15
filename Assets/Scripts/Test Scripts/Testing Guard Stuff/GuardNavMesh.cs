@@ -62,11 +62,16 @@ public class GuardNavMesh : MonoBehaviour
         if (dist > chaseStopDistance)
             guardAgent.SetDestination(guard.LastSeenPlayerPos);
         else
+        {
             StartCoroutine(PauseAndResume());
+            Invoke("Attack", .5f);
+        }
+            
     }
     
     IEnumerator PauseAndResume()
     {
+        //What is this for?
         state = GuardState.Pausing;
         guardAgent.ResetPath();
 
@@ -87,6 +92,25 @@ public class GuardNavMesh : MonoBehaviour
              return; 
         currentWaypoint = (currentWaypoint + 1) % waypoints.Length;
         GoToWaypoint(currentWaypoint);
+    }
+
+    //Suspect that this belongs here
+    void Attack()
+    {
+        Collider[] targets = Physics.OverlapSphere(transform.position + transform.forward, 1f);
+
+        foreach (Collider target in targets)
+        {
+            //Won't hold up if we need to make guards pick up able; make an interface instead, the only reason I'm not is because this because test pick up object has no functionality besides this
+            if (target.CompareTag("Player"))
+            {
+                Debug.Log("WHACK " + target.name);
+
+                PlayerStats.Stats.DealDamage();
+
+                break;
+            }
+        }
     }
     
     void OnDrawGizmos()

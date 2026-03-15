@@ -76,11 +76,13 @@ public class AISensor : MonoBehaviour
                 break;
             }
 
+            //If not cease behavior in observer
             observer.Seeing(false, Vector3.negativeInfinity);
 
         }
 
-        if(Objects.Count == 0)
+        //If list is empty cease behavior in observer
+        if (Objects.Count == 0)
         {
             observer.Seeing(false, Vector3.negativeInfinity);
         }

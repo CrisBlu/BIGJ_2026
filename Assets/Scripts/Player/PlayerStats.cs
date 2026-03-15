@@ -5,6 +5,9 @@ public class PlayerStats : ScriptableObject
 {
     public static PlayerStats Stats;
 
+    [SerializeField] public int Hitpoints_Max = 3;
+    private int hitpoints;
+
     //Should be private
     public float adrenaline;
     public float adrenaline_max;
@@ -17,6 +20,7 @@ public class PlayerStats : ScriptableObject
 
     [System.NonSerialized] public UnityEvent<float, float> Event_AdrenalineValueChanged;
     [System.NonSerialized] public UnityEvent Event_Taunted;
+    [System.NonSerialized] public UnityEvent<int> Event_DamageTaken;
 
     private void OnEnable()
     {
@@ -28,11 +32,16 @@ public class PlayerStats : ScriptableObject
 
         Stats = this;
 
+        hitpoints = Hitpoints_Max;
+
         if (Event_AdrenalineValueChanged == null)
             Event_AdrenalineValueChanged = new UnityEvent<float, float>();
 
         if (Event_Taunted == null)
             Event_Taunted = new UnityEvent();
+
+        if (Event_DamageTaken == null)
+            Event_DamageTaken = new UnityEvent<int>();
 
 
     }
@@ -44,6 +53,9 @@ public class PlayerStats : ScriptableObject
 
         Event_Taunted.RemoveAllListeners();
         Event_Taunted = null;
+
+        Event_DamageTaken.RemoveAllListeners();
+        Event_DamageTaken = null;
     }
 
     public bool ShiftAdrenaline(float multiplier = 1f)
@@ -70,5 +82,12 @@ public class PlayerStats : ScriptableObject
 
 
         Event_AdrenalineValueChanged.Invoke(adrenaline, adrenaline_max);
+    }
+
+    public void DealDamage()
+    {
+        hitpoints -= 1;
+
+        Event_DamageTaken.Invoke(hitpoints);
     }
 }
