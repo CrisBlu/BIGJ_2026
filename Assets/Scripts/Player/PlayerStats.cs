@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+using UnityEngine.SceneManagement;
+
 public class PlayerStats : ScriptableObject
 {
     public static PlayerStats Stats;
@@ -86,6 +88,12 @@ public class PlayerStats : ScriptableObject
 
     public void DealDamage()
     {
+        if(hitpoints <= 0)
+        {
+
+            SceneManager.LoadScene(0);
+        }
+
         hitpoints -= 1;
 
         Event_DamageTaken.Invoke(hitpoints);
