@@ -25,13 +25,13 @@ public class PlayerStats : ScriptableObject
     [System.NonSerialized] public UnityEvent<float, float> Event_AdrenalineValueChanged;
     [System.NonSerialized] public UnityEvent Event_Taunted;
     [System.NonSerialized] public UnityEvent<int> Event_DamageTaken;
-    [System.NonSerialized] public UnityEvent<float> Event_SecurityRaise;
+    [System.NonSerialized] public UnityEvent<float, float> Event_SecurityRaise;
 
     private void OnEnable()
     {
         //Theoretical Defaults
         adrenaline = 0;
-        adrenaline_max = 100f;
+        adrenaline_max = Adrenaline_Absolute_Min;
 
         securityValue = 0;
 
@@ -52,7 +52,7 @@ public class PlayerStats : ScriptableObject
             Event_DamageTaken = new UnityEvent<int>();
 
         if (Event_SecurityRaise == null)
-            Event_SecurityRaise = new UnityEvent<float>();
+            Event_SecurityRaise = new UnityEvent<float, float>();
 
     }
 
@@ -100,8 +100,10 @@ public class PlayerStats : ScriptableObject
     public void IncreaseSecurity(float value)
     {
         securityValue += value;
-        Debug.Log(securityValue);
-        Event_SecurityRaise.Invoke(securityValue);
+        adrenaline_max = securityValue + Adrenaline_Absolute_Min;
+        adrenaline_max = Mathf.Clamp(adrenaline_max, 0, Adrenaline_Absolute_Max);
+
+        Event_SecurityRaise.Invoke(securityValue, adrenaline_max);
 
     }
 

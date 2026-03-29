@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   Hitpoints_Max: 3
-  adrenaline: 59.0999
-  adrenaline_max: 100
-  Adrenaline_Absolute_Max: 100
-  Adrenaline_Absolute_Min: 1
+  adrenaline: 51.301434
+  adrenaline_max: 256.598
+  Adrenaline_Absolute_Max: 200
+  Adrenaline_Absolute_Min: 50
   Rate_Change_Adr: 0.3
   taunting: 0
+  securityValue: 206.59799
