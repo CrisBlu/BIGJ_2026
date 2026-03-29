@@ -8,6 +8,9 @@ namespace Test_Scripts
         public float playerSpeed = 5.0f;
         private float defaultPlayerSpeed;
         private float gravityValue = -9.81f;
+        public Animator animator;
+        public Transform spriteGroup;
+        public SpriteBillboard billboard;
 
         [Range(0f, 20f)] public float minGrindSpeed = 2f;
         [Range(0f, 20f)] public float maxGrindSpeed = 6f;
@@ -114,6 +117,11 @@ namespace Test_Scripts
                 grindCooldown -= Time.deltaTime;
             else
                 TrySnapToRail();
+            
+            if (input.x < 0)
+                spriteGroup.localScale = new Vector3(2, 2, 2);
+            else if (input.x > 0)
+                spriteGroup.localScale = new Vector3(-2, 2, 2);
         }
 
         // ── rail grind ─────────────────────────────────────────────────
@@ -146,6 +154,7 @@ namespace Test_Scripts
 
             Vector3 railDir = rail.GetDirection(grindT);
             grindDirection = Vector3.Dot(transform.forward, railDir) >= 0f ? 1f : -1f;
+            billboard.enabled = false;
         }
 
         void UpdateGrinding()
@@ -175,6 +184,7 @@ namespace Test_Scripts
             isGrinding = false;
             activeRail = null;
             grindCooldown = 0.5f;
+            billboard.enabled = true;
         }
 
         // ── twirl ──────────────────────────────────────────────────────
