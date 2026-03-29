@@ -20,15 +20,21 @@ public class PlayerStats : ScriptableObject
 
     [HideInInspector] public bool taunting;
 
+    [SerializeField] float securityValue;
+
     [System.NonSerialized] public UnityEvent<float, float> Event_AdrenalineValueChanged;
     [System.NonSerialized] public UnityEvent Event_Taunted;
     [System.NonSerialized] public UnityEvent<int> Event_DamageTaken;
+    [System.NonSerialized] public UnityEvent<float> Event_SecurityRaise;
 
     private void OnEnable()
     {
         //Theoretical Defaults
         adrenaline = 0;
         adrenaline_max = 100f;
+
+        securityValue = 0;
+
 
         taunting = false;
 
@@ -45,6 +51,8 @@ public class PlayerStats : ScriptableObject
         if (Event_DamageTaken == null)
             Event_DamageTaken = new UnityEvent<int>();
 
+        if (Event_SecurityRaise == null)
+            Event_SecurityRaise = new UnityEvent<float>();
 
     }
 
@@ -58,6 +66,9 @@ public class PlayerStats : ScriptableObject
 
         Event_DamageTaken.RemoveAllListeners();
         Event_DamageTaken = null;
+
+        Event_SecurityRaise.RemoveAllListeners();
+        Event_SecurityRaise = null;
     }
 
     public bool ShiftAdrenaline(float multiplier = 1f)
@@ -84,6 +95,14 @@ public class PlayerStats : ScriptableObject
 
 
         Event_AdrenalineValueChanged.Invoke(adrenaline, adrenaline_max);
+    }
+
+    public void IncreaseSecurity(float value)
+    {
+        securityValue += value;
+        Debug.Log(securityValue);
+        Event_SecurityRaise.Invoke(securityValue);
+
     }
 
     public void DealDamage()

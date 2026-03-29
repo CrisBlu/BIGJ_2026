@@ -17,16 +17,12 @@ public class Guard : MonoBehaviour, IObserver
     bool isSeeingPlayer;
     Vector3 lastSeenPlayerPos;
 
-    void Awake()
-    {
-        PlayerStats.Stats.Event_Taunted.AddListener(Taunted);
-        UI.attachedGuard = this;
-    }
 
 
     void Start()
     {
-
+        PlayerStats.Stats.Event_Taunted.AddListener(Taunted);
+        UI.attachedGuard = this;
         //Should equal a max
         timeTillAlert = TIME_TILL_ALERT;
 
@@ -56,6 +52,7 @@ public class Guard : MonoBehaviour, IObserver
 
         if(timeTillAlert == 0f)
         {
+            PlayerStats.Stats.IncreaseSecurity(.2f);
             //Make less segmeneted
             Vector3 LookHereDumbass = lastSeenPlayerPos;
 
