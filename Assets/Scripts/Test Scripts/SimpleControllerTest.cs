@@ -62,6 +62,8 @@ namespace Test_Scripts
             itemHeld = null;
 
             defaultPlayerSpeed = playerSpeed;
+
+            billboard.enabled = true;
         }
 
         private void OnDisable()
@@ -69,6 +71,8 @@ namespace Test_Scripts
             twirlAction.performed -= OnTwirl;
             pickUpAction.performed -= PickUp;
             putDownAction.performed -= PutDown;
+
+            billboard.enabled = false;
         }
 
         void Update()
