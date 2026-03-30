@@ -105,6 +105,7 @@ namespace Test_Scripts
 
             Vector2 input = moveAction.ReadValue<Vector2>();
             Vector3 move = new Vector3(input.x, 0, input.y);
+            animator.SetInteger("direction", (int)move.z);
             move = Vector3.ClampMagnitude(move, 1f);
 
             if (move != Vector3.zero)
