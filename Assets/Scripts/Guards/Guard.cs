@@ -13,6 +13,7 @@ public class Guard : MonoBehaviour, IObserver
     public Vector3 LastSeenPlayerPos => lastSeenPlayerPos;
 
     public float TIME_TILL_ALERT = 2;
+    public float timeTillAlertFloor;
     public float timeTillAlert;
     bool isSeeingPlayer;
     Vector3 lastSeenPlayerPos;
@@ -22,6 +23,7 @@ public class Guard : MonoBehaviour, IObserver
     void Start()
     {
         PlayerStats.Stats.Event_Taunted.AddListener(Taunted);
+        PlayerStats.Stats.Event_SecurityRaise.AddListener(RaiseAwareness);
         UI.attachedGuard = this;
         //Should equal a max
         timeTillAlert = TIME_TILL_ALERT;
@@ -29,6 +31,8 @@ public class Guard : MonoBehaviour, IObserver
         isSeeingPlayer = false;
 
         Viewer.observer = this;
+
+        timeTillAlertFloor = TIME_TILL_ALERT;
     }
 
 
@@ -37,7 +41,7 @@ public class Guard : MonoBehaviour, IObserver
         if(isSeeingPlayer)
         {
             //If time to alert is not 0 deduct time
-            timeTillAlert = timeTillAlert > 0f ? timeTillAlert - Time.deltaTime : 0;
+            timeTillAlert = timeTillAlert > 0f ? timeTillAlert - Time.deltaTime : 0f;
 
 
 
@@ -47,7 +51,7 @@ public class Guard : MonoBehaviour, IObserver
         }
         else
         {
-            timeTillAlert = timeTillAlert < TIME_TILL_ALERT ? timeTillAlert + Time.deltaTime : TIME_TILL_ALERT;
+            timeTillAlert = timeTillAlert < timeTillAlertFloor ? timeTillAlert + Time.deltaTime : timeTillAlertFloor;
         }
 
         if(timeTillAlert == 0f)
@@ -62,6 +66,12 @@ public class Guard : MonoBehaviour, IObserver
        
     }
 
+    public void RaiseAwareness(float security, float trash)
+    {
+        timeTillAlertFloor = TIME_TILL_ALERT - (security / 100);
+        Debug.Log(timeTillAlertFloor);
+    }
+
     public void Seeing(bool state, Vector3 position)
     {
         isSeeingPlayer = state;
@@ -71,6 +81,7 @@ public class Guard : MonoBehaviour, IObserver
             lastSeenPlayerPos = position;
         }
     }
+
 
     public void Taunted()
     {

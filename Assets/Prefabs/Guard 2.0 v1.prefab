@@ -119,7 +119,7 @@ MonoBehaviour:
   timeSlider: {fileID: 2021374138456985933}
   increaseRate: 0.75
   MainCharacter: {fileID: 0}
-  aiSensor: {fileID: 0}
+  aiSensor: {fileID: 4755968575012995274}
   attachedGuard: {fileID: 0}
   flashImage: {fileID: 1783215980141031328}
   flashSpeed: 3
@@ -727,6 +727,7 @@ GameObject:
   - component: {fileID: 4802776780911080483}
   - component: {fileID: 6031156173673877942}
   - component: {fileID: 1283358238669183602}
+  - component: {fileID: 9135399889626859164}
   m_Layer: 0
   m_Name: Guard 2.0 v1
   m_TagString: PickUp
@@ -790,6 +791,29 @@ MonoBehaviour:
   waypointReachedDistance: 0.5
   chaseStopDistance: 1.5
   pauseDuration: 2
+--- !u!136 &9135399889626859164
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4694274605662822991}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2.220833
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.9557866, z: 0}
 --- !u!1 &4919569643530667593
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,7 +825,6 @@ GameObject:
   - component: {fileID: 2005222998933519475}
   - component: {fileID: 7555667208782077591}
   - component: {fileID: 8110892519615562755}
-  - component: {fileID: 4872468659181020140}
   m_Layer: 0
   m_Name: Gaurd Body
   m_TagString: Untagged
@@ -881,29 +904,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &4872468659181020140
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4919569643530667593}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5671063558469036881
 GameObject:
   m_ObjectHideFlags: 0
@@ -1295,7 +1295,6 @@ GameObject:
   - component: {fileID: 7342435042694187888}
   - component: {fileID: 4372235843535740506}
   - component: {fileID: 7029926787623839520}
-  - component: {fileID: 1964515270388665926}
   m_Layer: 0
   m_Name: Guard SensorMesh
   m_TagString: PickUp
@@ -1412,29 +1411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Viewer: {fileID: 4755968575012995274}
-  UI: {fileID: 0}
+  UI: {fileID: 2627289737086810056}
   TIME_TILL_ALERT: 2
+  timeTillAlertFloor: 0
   timeTillAlert: 0
---- !u!136 &1964515270388665926
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8917315663047390326}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.52238387
-  m_Height: 1.9825315
-  m_Direction: 1
-  m_Center: {x: 2.6917807e-17, y: 1.0493331, z: -0.013730824}
