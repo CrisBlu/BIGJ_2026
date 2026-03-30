@@ -45,6 +45,8 @@ namespace Test_Scripts
         private bool isTwirling;
         private float twirlTimer;
 
+        bool isRunning;
+
         private void OnEnable()
         {
             moveAction = InputSystem.actions.FindAction("Move");
@@ -85,6 +87,7 @@ namespace Test_Scripts
             }
             else
             {
+                animator.SetBool("running", false);
                 playerSpeed = defaultPlayerSpeed;
             }
         }
@@ -244,13 +247,16 @@ namespace Test_Scripts
 
         void Sprint()
         {
+            
             PlayerStats stats = PlayerStats.Stats;
             if (stats.ShiftAdrenaline(-1.5f))
             {
+                animator.SetBool("running", true);
                 playerSpeed = 2 * defaultPlayerSpeed;
             }
             else
             {
+                animator.SetBool("running", false);
                 playerSpeed = defaultPlayerSpeed;
             }
 
